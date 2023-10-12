@@ -8,9 +8,9 @@
  */
 void clean_buffer(char **buffer, ssize_t len)
 {
-	if (*buffer)
+	if (*buffer && (*buffer)[len - 1] == '\n')
 	{
-		if (len == 1 && (*buffer)[0] == '\n')
+		if (len == 1)
 			_free(buffer);
 		else
 			(*buffer)[len - 1] = '\0';
@@ -37,7 +37,9 @@ void prompt(char **buffer, char *sh_name)
 	if (read == -1)
 	{
 		if (feof(stdin))
+		{
 			exit(EXIT_SUCCESS);
+		}
 		else
 			perror(sh_name);
 		_free(buffer);
