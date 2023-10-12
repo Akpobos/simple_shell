@@ -11,5 +11,6 @@
 
 void prompt(char input[MAX_INPUT]);
 void execute(char input[MAX_INPUT]);
+unsigned int _strlen(char *str);
 
 #endif /*HEADER_H*/

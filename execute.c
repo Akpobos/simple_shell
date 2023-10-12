@@ -7,7 +7,7 @@
  */
 void execute(char input[MAX_INPUT])
 {
-	int len = strlen(input);
+	int len = _strlen(input);
 	int pid;
 
 	if (len > 0)
@@ -30,7 +30,7 @@ void execute(char input[MAX_INPUT])
 
 		if (execve(input, pointerStr, NULL) == -1)
 		{
-			perror("");
+			perror("#shell$");
 			exit(2);
 		}
 	}
