@@ -2,28 +2,16 @@
 
 /**
  * execute - Executes a command
- * @buffer: The user input
+ * @command: The user tokenized command
  * @sh_name: The shell name
+ * @env: Environment variables
  * Return: Nothing
  */
-void execute(char **buffer, char *sh_name)
+void execute(char *command[TOK_BUFSIZE], char *sh_name, char **env)
 {
-	if (buffer && *buffer)
+	if (execve(command[0], command, env) == -1)
 	{
-		char *cmd_arr[TOK_BUFSIZE];
-		size_t count = 0;
-		char *token = NULL;
-
-		token = strtok(*buffer, TOK_DELIM);
-		while (token != NULL)
-		{
-			cmd_arr[count++] = token;
-			token = strtok(NULL, TOK_DELIM);
-		}
-		cmd_arr[count] = NULL;
-		if (execve(cmd_arr[0], cmd_arr, NULL) == -1)
-		{
-			perror(sh_name);
-		}
+		perror(sh_name);
+		exit(EXIT_SUCCESS);
 	}
 }
