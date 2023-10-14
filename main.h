@@ -20,6 +20,7 @@ void _print(char *buffer);
 
 /* string.c */
 unsigned int _strlen(char *buffer);
+int _strcmp(char *str1, char *str2);
 
 /* free.c */
 void _free(char **buffer);
