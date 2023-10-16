@@ -5,16 +5,19 @@
  * @command: user tokenized command
  * Return: 0 if builtin handled else -1
  */
-int handle_built_ins(char *command[TOK_BUFSIZE], char *environ[])
+int handle_built_ins(char *command[TOK_BUFSIZE])
 {
-	if (_strcmp(command[0], "exit") == 0)
+	built_ins_t built_ins[] = {
+		{ "exit", exit_built_in }
+	};
+	size_t i;
+
+	for (i = 0; i < 1; i++)
 	{
-		exit(EXIT_SUCCESS);
-	}
-	else if (_strcmp(command[0], "env") == 0)
-	{
-		print_current_env(environ);
-		return (1);
+		if (_strcmp(command[0], (built_ins + i)->built_in) == 0)
+		{
+			return ((built_ins + i)->handler(command));
+		}
 	}
 	return (-1);
 }
