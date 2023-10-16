@@ -25,7 +25,7 @@ int main(int ac, char *av[], char **env)
 		{
 			int check;
 
-			check = handle_built_ins(command);
+			check = handle_built_ins(command, env);
 			if (check != -1)
 				continue;
 		}

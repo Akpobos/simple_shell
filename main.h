@@ -34,6 +34,9 @@ void execute(char *command[TOK_BUFSIZE], char *sh_name, char **env);
 pid_t create_child_process(char *sh_name);
 
 /* built-ins.c */
-int handle_built_ins(char *command[TOK_BUFSIZE]);
+int handle_built_ins(char *command[TOK_BUFSIZE], char *environ[]);
+
+/*current.c*/
+void print_current_env(char *environ[]);
 
 #endif
