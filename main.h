@@ -50,7 +50,7 @@ void _free(char **buffer);
 /* execute.c */
 void execute(char *command[TOK_BUFSIZE], char *sh_name, char **env);
 int should_exec_command(char *command[TOK_BUFSIZE], char **env, char *sh_name);
-void build_dir(char *command[TOK_BUFSIZE], char **env);
+int build_dir(char *command[TOK_BUFSIZE], char **env);
 
 /* process.c */
 pid_t create_child_process(char *sh_name);

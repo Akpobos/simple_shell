@@ -4,16 +4,17 @@
  * build_dir - Build full path. ls - /bin/ls
  * @command: The command array
  * @env: Environment variable
- * Return: Nothing
+ * Return: -1 if path is not found else 1
  */
-void build_dir(char *command[TOK_BUFSIZE], char **env)
+int build_dir(char *command[TOK_BUFSIZE], char **env)
 {
 	char *path = _getenv("PATH", env), *tmp = NULL, *dir = NULL;
 	size_t path_len = _strlen(path);
+	int is_found = -1;
 
 	tmp = malloc(sizeof(*tmp) * path_len);
 	if (tmp == NULL)
-		return;
+		return (is_found);
 	_strlcpy(tmp, path, path_len);
 	if (tmp != NULL)
 	{
@@ -26,13 +27,17 @@ void build_dir(char *command[TOK_BUFSIZE], char **env)
 
 			dir = malloc(sizeof(*dir) * len);
 			if (dir == NULL)
+			{
+				is_found = -1;
 				break;
+			}
 			_strlcat(dir, token, len);
 			_strlcat(dir, "/", len);
 			_strlcat(dir, command[0], len);
 			if (stat(dir, &st) != -1)
 			{
 				command[0] = dir;
+				is_found = 1;
 				break;
 			}
 			_free(&dir);
@@ -41,6 +46,7 @@ void build_dir(char *command[TOK_BUFSIZE], char **env)
 	}
 	_free(&tmp);
 	tmp = NULL;
+	return (is_found);
 }
 
 /**
@@ -54,14 +60,15 @@ int should_exec_command(char *command[TOK_BUFSIZE], char **env, char *sh_name)
 {
 	if (*(command[0]) != '/')
 	{
-		int is_built_in = handle_built_ins(command);
+		int is_built_in = handle_built_ins(command), is_found;
 
 		if (is_built_in != -1)
 			return (-1);
-		build_dir(command, env);
+		is_found = build_dir(command, env);
 		if (access(command[0], X_OK) == -1)
 		{
-			_free(&command[0]);
+			if (is_found != -1)
+				_free(&command[0]);
 			perror(sh_name);
 			return (-1);
 		}
