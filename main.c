@@ -16,16 +16,16 @@ int main(int ac, char *av[], char **env)
 	while (true)
 	{
 		char *command[TOK_BUFSIZE] = { NULL };
-		int exec_cmd;
+		int exec_cmd = 1;
 
 		prompt(&buffer, av[0]);
 		if (buffer == NULL)
 			continue;
 
 		build_command(&buffer, command);
-		exec_cmd = should_exec_command(command, env, av[0]);
-		if (exec_cmd == -1)
-			continue;
+/*		exec_cmd = should_exec_command(command, env, av[0]);*/
+/*		if (exec_cmd == -1)*/
+/*			continue;*/
 
 		pid = create_child_process(av[0]);
 		if (pid == -1)
