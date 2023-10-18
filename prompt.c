@@ -27,18 +27,20 @@ void prompt(char **buffer, char *sh_name)
 {
 	size_t n = 0;
 	ssize_t read;
-
 	char *sd = "#cisfun$ ";
+	int ia = isatty(STDIN_FILENO);
 
 	if (*buffer != NULL)
 		_free(buffer);
-	_print(sd);
+	if (ia)
+		_print(sd);
 	read = getline(buffer, &n, stdin);
 	if (read == -1)
 	{
 		if (feof(stdin))
 		{
-			_print("\n");
+			if (ia)
+				_print("\n");
 			_free(buffer);
 			exit(EXIT_SUCCESS);
 		}
