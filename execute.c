@@ -31,7 +31,7 @@ int build_dir(char *command[TOK_BUFSIZE], char **env)
 				is_found = -1;
 				break;
 			}
-			_strlcat(dir, token, len);
+			_strlcpy(dir, token, len);
 			_strlcat(dir, "/", len);
 			_strlcat(dir, command[0], len);
 			if (stat(dir, &st) != -1)
