@@ -7,6 +7,11 @@
  */
 int exit_built_in(char *command[TOK_BUFSIZE])
 {
-	(void)command;
-	exit(EXIT_SUCCESS);
+	if (command[1] != NULL)
+	{
+		int stat = _atoi(command[1]);
+		exit(stat);
+	}
+	else
+		exit(EXIT_SUCCESS);
 }

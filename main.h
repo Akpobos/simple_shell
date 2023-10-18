@@ -43,6 +43,8 @@ size_t _strlcat(char *dst, const char *src, size_t dstsize);
 size_t _strlcpy(char *dst, const char *src, size_t dstsize);
 void build_command(char **buffer, char *command[TOK_BUFSIZE]);
 
+/*_atoi.c*/
+int _atoi(const char *str);
 
 /* free.c */
 void _free(char **buffer);
