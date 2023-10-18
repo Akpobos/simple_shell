@@ -21,11 +21,12 @@ int main(int ac, char *av[], char **env)
 		prompt(&buffer, av[0]);
 		if (buffer == NULL)
 			continue;
+		buffer[_strcspn(buffer, "\n")] = '\0';
 
 		build_command(&buffer, command);
-/*		exec_cmd = should_exec_command(command, env, av[0]);*/
-/*		if (exec_cmd == -1)*/
-/*			continue;*/
+		exec_cmd = should_exec_command(command, env, av[0]);
+		if (exec_cmd == -1)
+			continue;
 
 		pid = create_child_process(av[0]);
 		if (pid == -1)
