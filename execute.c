@@ -12,7 +12,7 @@ int build_dir(char *command[TOK_BUFSIZE], char **env)
 	size_t path_len = _strlen(path);
 	int is_found = -1;
 
-	tmp = malloc(sizeof(*tmp) * path_len);
+	tmp = malloc(sizeof(*tmp) * (path_len + 1));
 	if (tmp == NULL)
 		return (is_found);
 	_strlcpy(tmp, path, path_len);
@@ -22,7 +22,7 @@ int build_dir(char *command[TOK_BUFSIZE], char **env)
 
 		while (token != NULL)
 		{
-			size_t len = (_strlen(token) + _strlen(command[0]) + 1);
+			size_t len = (_strlen(token) + _strlen(command[0]) + 2);
 			struct stat st;
 
 			dir = malloc(sizeof(*dir) * len);
