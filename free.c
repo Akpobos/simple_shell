@@ -7,6 +7,9 @@
  */
 void _free(char **buffer)
 {
-	free(*buffer);
-	*buffer = NULL;
+	if (*buffer != NULL)
+	{
+		free(*buffer);
+		*buffer = NULL;
+	}
 }

@@ -58,7 +58,7 @@ int build_dir(char *command[TOK_BUFSIZE], char **env)
  */
 int should_exec_command(char *command[TOK_BUFSIZE], char **env, char *sh_name)
 {
-	if (*(command[0]) != '/')
+	if (*(command[0]) != '/' && *(command[0]) != '.')
 	{
 		int is_built_in = handle_built_ins(command), is_found;
 
