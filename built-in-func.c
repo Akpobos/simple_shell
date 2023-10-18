@@ -7,6 +7,6 @@
  */
 int exit_built_in(char *command[TOK_BUFSIZE])
 {
-	(void)command;
+	_free(command);
 	exit(EXIT_SUCCESS);
 }

@@ -41,6 +41,7 @@ int main(int ac, char *av[], char **env)
 				_free(&command[0]);
 		}
 	}
-	_free(&buffer);
+	if (buffer)
+		_free(&buffer);
 	exit(EXIT_SUCCESS);
 }

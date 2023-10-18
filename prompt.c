@@ -39,6 +39,7 @@ void prompt(char **buffer, char *sh_name)
 		if (feof(stdin))
 		{
 			_print("\n");
+			_free(buffer);
 			exit(EXIT_SUCCESS);
 		}
 		else
