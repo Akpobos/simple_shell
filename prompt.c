@@ -1,6 +1,28 @@
 #include "main.h"
 
 /**
+ * check_emptiness - Check if the input is empty
+ * @buffer: The buffer
+ * Return: Nothing
+ */
+void check_emptiness(char **buffer)
+{
+	size_t i, is_empty = 1;
+
+	for (i = 0; (*buffer)[i] != '\0'; i++)
+	{
+		if ((*buffer)[i] != ' ' && (*buffer)[i] != '\n')
+		{
+			is_empty = 0;
+			break;
+		}
+	}
+
+	if (is_empty)
+		_free(buffer);
+}
+
+/**
  * clean_buffer - Replace newline with terminator
  * @buffer: The buffer
  * @len: buffer length
@@ -54,6 +76,7 @@ void prompt(char **buffer, char *sh_name)
 		{
 			_print("\n");
 		}
+		check_emptiness(buffer);
 		clean_buffer(buffer, read);
 	}
 }

@@ -32,6 +32,7 @@ int exit_built_in(char *command[TOK_BUFSIZE]);
 /* prompt.c */
 void prompt(char **buffer, char *sh_name);
 void clean_buffer(char **buffer, ssize_t len);
+void check_emptiness(char **buffer);
 
 /* print.c */
 void _print(char *buffer);

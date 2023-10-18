@@ -68,7 +68,7 @@ int should_exec_command(char *command[TOK_BUFSIZE], char **env, char *sh_name)
 		if (access(command[0], X_OK) == -1)
 		{
 			if (is_found != -1)
-				_free(&command[0]);
+				_free(command);
 			perror(sh_name);
 			return (-1);
 		}
